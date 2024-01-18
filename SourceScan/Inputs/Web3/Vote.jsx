@@ -1,10 +1,10 @@
 const { getConfig } = VM.require(
   `sourcescan.near/widget/SourceScan.libs.constants`
 )
-const { Button, CHStack, CStack, Text, Center } = VM.require(
+const { Button, CHStack, CStack, Text, Center, DivPointer } = VM.require(
   `sourcescan.near/widget/SourceScan.UI.Components`
 )
-const { ArrowUpIcon, ArrowDownIcon } = VM.require(
+const { UpVoteIcon, DownVoteIcon } = VM.require(
   `sourcescan.near/widget/SourceScan.UI.Icons`
 )
 
@@ -21,15 +21,11 @@ const vote = () => {}
 return (
   <CHStack>
     <CStack>
-      <div onClick={vote}>
-        <ArrowUpIcon label={'Upvote'} width={'24px'} height={'24px'} />
-      </div>
+      <UpVoteIcon width={'24px'} height={'24px'} onClick={vote} />
       <div>{upVotes}</div>
     </CStack>
     <CStack>
-      <div onClick={vote}>
-        <ArrowDownIcon width={'24px'} height={'24px'} />
-      </div>
+      <DownVoteIcon width={'24px'} height={'24px'} onClick={vote} />
       <div>{downVotes}</div>
     </CStack>
   </CHStack>

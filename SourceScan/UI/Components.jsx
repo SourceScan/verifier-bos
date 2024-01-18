@@ -65,4 +65,8 @@ const Text = styled.div`
   font-size: 16px;
 `
 
-return { Button, CHStack, CStack, HStack, Stack, Text, Center }
+const DivPointer = styled.div`
+  cursor: pointer;
+`
+
+return { Button, CHStack, CStack, HStack, Stack, Text, Center, DivPointer, Div }
