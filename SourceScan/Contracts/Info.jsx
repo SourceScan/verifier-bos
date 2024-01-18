@@ -289,7 +289,9 @@ return (
             />
           </A>
         </HStack>
-        <Widget src={`${state.ownerId}/widget/SourceScan.Inputs.Web3.Vote`} />
+        <Widget
+          src={`${state.ownerId}/widget/SourceScan.Inputs.Web3.Contract.Votes`}
+        />
         <Stack>
           <UHeading>Security Checks</UHeading>
           <Stack>

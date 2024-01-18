@@ -3,7 +3,6 @@ const getConfig = (network) => {
     case 'mainnet':
       return {
         appUrl: 'https://sourcescan.dev',
-        verifierId: 'sourcescan.near',
         ownerId: 'sourcescan.near',
         rpcUrl: 'https://rpc.mainnet.near.org',
         contractId: 'dev.sourcescan.near',
@@ -12,7 +11,6 @@ const getConfig = (network) => {
     case 'testnet':
       return {
         appUrl: 'https://testnet.sourcescan.dev',
-        verifierId: 'sourcescan.testnet',
         ownerId: 'sourcescan.testnet',
         rpcUrl: 'https://rpc.testnet.near.org',
         contractId: 'dev.sourcescan.testnet',
