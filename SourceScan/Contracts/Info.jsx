@@ -291,6 +291,7 @@ return (
         </HStack>
         <Widget
           src={`${state.ownerId}/widget/SourceScan.Inputs.Web3.Contract.Votes`}
+          props={{ contractId: props.contractId, contract: state.contract }}
         />
         <Stack>
           <UHeading>Security Checks</UHeading>
