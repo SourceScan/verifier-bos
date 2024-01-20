@@ -293,6 +293,10 @@ return (
           src={`${state.ownerId}/widget/SourceScan.Inputs.Web3.Contract.Votes`}
           props={{ contractId: props.contractId, contract: state.contract }}
         />
+        <Widget
+          src={`${state.ownerId}/widget/SourceScan.Inputs.Web3.Contract.Comments`}
+          props={{ contractId: props.contractId, contract: state.contract }}
+        />
         <Stack>
           <UHeading>Security Checks</UHeading>
           <Stack>

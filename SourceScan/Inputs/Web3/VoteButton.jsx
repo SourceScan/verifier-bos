@@ -1,14 +1,14 @@
 const { getConfig } = VM.require(
   `sourcescan.near/widget/SourceScan.libs.constants`
 )
+const config = getConfig(context.networkId)
+
 const { Button, CStack } = VM.require(
-  `sourcescan.near/widget/SourceScan.UI.Components`
+  `${config.ownerId}/widget/SourceScan.UI.Components`
 )
 const { UpVoteIcon, DownVoteIcon } = VM.require(
-  `sourcescan.near/widget/SourceScan.UI.Icons`
+  `${config.ownerId}/widget/SourceScan.UI.Icons`
 )
-
-const config = getConfig(context.networkId)
 
 // Upvote, Downvote
 const type = props.type

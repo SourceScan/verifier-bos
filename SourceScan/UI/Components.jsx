@@ -65,8 +65,33 @@ const Text = styled.div`
   font-size: 16px;
 `
 
-const DivPointer = styled.div`
-  cursor: pointer;
+const DashedContainer = styled.div`
+  padding: 18px;
+  color: currentColor;
+  border: 1px dashed currentColor;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+
+  @media only screen and (max-width: 750px) {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+  }
 `
 
-return { Button, CHStack, CStack, HStack, Stack, Text, Center, DivPointer, Div }
+return {
+  Button,
+  CHStack,
+  CStack,
+  HStack,
+  Stack,
+  Text,
+  Center,
+  DashedContainer,
+}
