@@ -96,6 +96,20 @@ const Stack = styled.div`
   }
 `
 
+const CStack = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  @media only screen and (max-width: 750px) {
+    width: 90%;
+  }
+`
+
 const HStack = styled.div`
   width: 100%;
   display: flex;
@@ -110,6 +124,20 @@ const HStack = styled.div`
     text-align: center;
     align-items: center;
     justify-content: center;
+  }
+`
+
+const CHStack = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  @media only screen and (max-width: 750px) {
+    width: 90%;
   }
 `
 
@@ -280,84 +308,14 @@ return (
         props={{ width: '64px', height: '64px' }}
       />
     ) : (
-      <Main>
-        <HStack>
-          <Heading>{props.contractId}</Heading>
-          <A
-            href={`https://${
-              context.networkId === 'mainnet' ? '' : 'testnet.'
-            }nearblocks.io/address/${props.contractId}`}
-            target={'_blank'}
-          >
-            <Widget
-              src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
-              props={{ width: '18px', height: '18px' }}
-            />
-          </A>
-        </HStack>
-        <Widget
-          src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Social`}
-          props={{
-            contractId: props.contractId,
-            contract: state.contract,
-            onCommentsClick: handleCommentsClick,
-          }}
-        />
-        {showComments ? (
-          <Stack>
-            <UHeading>Comments</UHeading>
-            <Widget
-              src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Comments`}
-              props={{ contractId: props.contractId, contract: state.contract }}
-            />
-          </Stack>
-        ) : null}
-        <Stack>
-          <UHeading>Security Checks</UHeading>
-          <Stack>
-            <HStack>
-              {state.wasm.value === null ? (
-                <Widget
-                  src={`${state.ownerId}/widget/SourceScan.Common.Spinner`}
-                />
-              ) : state.wasm.value ? (
-                <Widget
-                  src={`${state.ownerId}/widget/SourceScan.Common.Icons.CheckIcon`}
-                  props={{
-                    width: '20px',
-                    height: '20px',
-                    tooltip: { placement: props.placement, label: 'Approved' },
-                  }}
-                />
-              ) : (
-                <Widget
-                  src={`${state.ownerId}/widget/SourceScan.Common.Icons.CrossIcon`}
-                  props={{
-                    width: '20px',
-                    height: '20px',
-                    tooltip: {
-                      placement: props.placement,
-                      label: state.wasm.error ? 'Error' : 'Not approved',
-                    },
-                  }}
-                />
-              )}
-              <Text>
-                Wasm Code {state.wasm.value ? 'Matches' : 'Mismatches'}
-              </Text>
-            </HStack>
-          </Stack>
-        </Stack>
-        <Stack>
-          <UHeading>Source Code</UHeading>
-          <HStack>
-            <Text>Github</Text>
+      <CStack>
+        <Main>
+          <CHStack>
+            <Heading>{props.contractId}</Heading>
             <A
-              href={`https://github.com/${state.contract.github.owner}/${
-                state.contract.github.repo
-              }/tree/${state.contract.github.sha}/${formatSourceCodePath(
-                state.contract.entry_point
-              )}`}
+              href={`https://${
+                context.networkId === 'mainnet' ? '' : 'testnet.'
+              }nearblocks.io/address/${props.contractId}`}
               target={'_blank'}
             >
               <Widget
@@ -365,98 +323,179 @@ return (
                 props={{ width: '18px', height: '18px' }}
               />
             </A>
-          </HStack>
-          {state.contract.cid ? (
-            <HStack>
-              <Text>Code Viewer(IPFS)</Text>
-              <A
-                href={`${state.appUrl}/code/${props.contractId}`}
-                target={'_blank'}
-              >
-                <Widget
-                  src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
-                  props={{ width: '18px', height: '18px' }}
-                />
-              </A>
-            </HStack>
-          ) : null}
-        </Stack>
-        <Stack>
-          <UHeading>Code hash</UHeading>
-          <Desktop>
-            <Text>{state.contract.code_hash}</Text>
-          </Desktop>
-          <Mobile>
-            <Text>{truncateStringInMiddle(state.contract.code_hash, 12)}</Text>
-          </Mobile>
-        </Stack>
-        <Stack>
-          <UHeading>Builder image</UHeading>
-          <OverlayTrigger
-            key={'top'}
-            placement={'top'}
-            overlay={<Tooltip id={`tooltip-top`}>Copy</Tooltip>}
-          >
-            <TooltipText
-              onClick={() => {
-                clipboard.writeText(state.contract.builder_image)
-              }}
-            >
-              {truncateAfterSplit(state.contract.builder_image, 8)}
-            </TooltipText>
-          </OverlayTrigger>
-        </Stack>
-        <Stack>
-          <UHeading>Entry Point</UHeading>
-          <EPContainer>
-            <Text>{state.contract.entry_point}</Text>
-          </EPContainer>
-        </Stack>
-        <Stack>
-          <UHeading>Lang</UHeading>
-          <Text>{state.contract.lang === 'ts' ? 'TypeScript' : 'Rust'}</Text>
-        </Stack>
-        {state.contract.cid ? (
-          <Stack>
-            <UHeading>IPFS</UHeading>
-            <HStack>
-              <Desktop>
-                <Text>{state.contract.cid}</Text>
-              </Desktop>
-              <Mobile>
-                <Text>{truncateStringInMiddle(state.contract.cid, 8)}</Text>
-              </Mobile>
-              <A
-                href={`${state.apiHost}/ipfs/${state.contract.cid}`}
-                target={'_blank'}
-              >
-                <Widget
-                  src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
-                  props={{ width: '18px', height: '18px' }}
-                />
-              </A>
-            </HStack>
-          </Stack>
-        ) : null}
-        {state.contract.github ? (
-          <Stack>
-            <UHeading>Github</UHeading>
+          </CHStack>
+          <CStack>
             <Widget
-              src={`${state.ownerId}/widget/SourceScan.Common.Github.GithubLink`}
+              src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Social`}
               props={{
-                github: state.contract.github,
-                theme: {
-                  color: state.theme.color,
-                  heading: {
-                    fontSize: state.heading.fontSize,
-                    fontWeight: '800',
-                  },
-                },
+                contractId: props.contractId,
+                contract: state.contract,
+                onCommentsClick: handleCommentsClick,
               }}
             />
+            {showComments ? (
+              <Widget
+                src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Comments`}
+                props={{
+                  contractId: props.contractId,
+                  contract: state.contract,
+                }}
+              />
+            ) : null}
+          </CStack>
+        </Main>
+        <Main>
+          <Stack>
+            <UHeading>Security Checks</UHeading>
+            <Stack>
+              <HStack>
+                {state.wasm.value === null ? (
+                  <Widget
+                    src={`${state.ownerId}/widget/SourceScan.Common.Spinner`}
+                  />
+                ) : state.wasm.value ? (
+                  <Widget
+                    src={`${state.ownerId}/widget/SourceScan.Common.Icons.CheckIcon`}
+                    props={{
+                      width: '20px',
+                      height: '20px',
+                      tooltip: {
+                        placement: props.placement,
+                        label: 'Approved',
+                      },
+                    }}
+                  />
+                ) : (
+                  <Widget
+                    src={`${state.ownerId}/widget/SourceScan.Common.Icons.CrossIcon`}
+                    props={{
+                      width: '20px',
+                      height: '20px',
+                      tooltip: {
+                        placement: props.placement,
+                        label: state.wasm.error ? 'Error' : 'Not approved',
+                      },
+                    }}
+                  />
+                )}
+                <Text>
+                  Wasm Code {state.wasm.value ? 'Matches' : 'Mismatches'}
+                </Text>
+              </HStack>
+            </Stack>
           </Stack>
-        ) : null}
-      </Main>
+          <Stack>
+            <UHeading>Source Code</UHeading>
+            <HStack>
+              <Text>Github</Text>
+              <A
+                href={`https://github.com/${state.contract.github.owner}/${
+                  state.contract.github.repo
+                }/tree/${state.contract.github.sha}/${formatSourceCodePath(
+                  state.contract.entry_point
+                )}`}
+                target={'_blank'}
+              >
+                <Widget
+                  src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
+                  props={{ width: '18px', height: '18px' }}
+                />
+              </A>
+            </HStack>
+            {state.contract.cid ? (
+              <HStack>
+                <Text>Code Viewer(IPFS)</Text>
+                <A
+                  href={`${state.appUrl}/code/${props.contractId}`}
+                  target={'_blank'}
+                >
+                  <Widget
+                    src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
+                    props={{ width: '18px', height: '18px' }}
+                  />
+                </A>
+              </HStack>
+            ) : null}
+          </Stack>
+          <Stack>
+            <UHeading>Code hash</UHeading>
+            <Desktop>
+              <Text>{state.contract.code_hash}</Text>
+            </Desktop>
+            <Mobile>
+              <Text>
+                {truncateStringInMiddle(state.contract.code_hash, 12)}
+              </Text>
+            </Mobile>
+          </Stack>
+          <Stack>
+            <UHeading>Builder image</UHeading>
+            <OverlayTrigger
+              key={'top'}
+              placement={'top'}
+              overlay={<Tooltip id={`tooltip-top`}>Copy</Tooltip>}
+            >
+              <TooltipText
+                onClick={() => {
+                  clipboard.writeText(state.contract.builder_image)
+                }}
+              >
+                {truncateAfterSplit(state.contract.builder_image, 8)}
+              </TooltipText>
+            </OverlayTrigger>
+          </Stack>
+          <Stack>
+            <UHeading>Entry Point</UHeading>
+            <EPContainer>
+              <Text>{state.contract.entry_point}</Text>
+            </EPContainer>
+          </Stack>
+          <Stack>
+            <UHeading>Lang</UHeading>
+            <Text>{state.contract.lang === 'ts' ? 'TypeScript' : 'Rust'}</Text>
+          </Stack>
+          {state.contract.cid ? (
+            <Stack>
+              <UHeading>IPFS</UHeading>
+              <HStack>
+                <Desktop>
+                  <Text>{state.contract.cid}</Text>
+                </Desktop>
+                <Mobile>
+                  <Text>{truncateStringInMiddle(state.contract.cid, 8)}</Text>
+                </Mobile>
+                <A
+                  href={`${state.apiHost}/ipfs/${state.contract.cid}`}
+                  target={'_blank'}
+                >
+                  <Widget
+                    src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
+                    props={{ width: '18px', height: '18px' }}
+                  />
+                </A>
+              </HStack>
+            </Stack>
+          ) : null}
+          {state.contract.github ? (
+            <Stack>
+              <UHeading>Github</UHeading>
+              <Widget
+                src={`${state.ownerId}/widget/SourceScan.Common.Github.GithubLink`}
+                props={{
+                  github: state.contract.github,
+                  theme: {
+                    color: state.theme.color,
+                    heading: {
+                      fontSize: state.heading.fontSize,
+                      fontWeight: '800',
+                    },
+                  },
+                }}
+              />
+            </Stack>
+          ) : null}
+        </Main>
+      </CStack>
     )}
   </Center>
 )

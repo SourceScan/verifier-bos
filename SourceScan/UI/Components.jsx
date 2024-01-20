@@ -1,28 +1,3 @@
-const Button = styled.a`
-  height: 36px;
-  width: 96px;
-  text-align: center;
-  font-weight: 600;
-  border-radius: 6px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border: 1px dashed ${state.theme.border};
-  color: ${state.theme.color};
-  background-color: ${state.theme.bg};
-  transition: background-color 0.1s ease-in-out;
-
-  &:hover,
-  &:focus {
-    background: #ecedee;
-    text-decoration: none;
-    outline: none;
-    color: ${state.theme.color};
-  }
-  :hover {
-    background-color: ${state.theme.hover.bg};
-  }
-`
-
 const Center = styled.div`
   display: flex;
   justify-content: center;
@@ -43,13 +18,6 @@ const HStack = styled.div`
   flex-direction: row;
   justify-content: space-between;
   gap: 10px;
-`
-
-const BHStack = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 30px;
 `
 
 const CStack = styled.div`
@@ -82,7 +50,8 @@ const DashedContainer = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
+  width: 100%;
 
   @media only screen and (max-width: 750px) {
     text-align: center;
@@ -93,7 +62,6 @@ const DashedContainer = styled.div`
 `
 
 return {
-  Button,
   CHStack,
   CStack,
   HStack,

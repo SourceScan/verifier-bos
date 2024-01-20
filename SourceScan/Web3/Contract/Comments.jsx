@@ -4,6 +4,10 @@ const { getConfig } = VM.require(
 const config = getConfig(context.networkId)
 const contractId = props.contractId
 
+const { CHStack } = VM.require(
+  `${config.ownerId}/widget/SourceScan.UI.Components`
+)
+
 const [comments, setComments] = useState(null)
 useEffect(() => {
   if (!contractId) return
@@ -15,22 +19,48 @@ useEffect(() => {
   })
 }, [contractId])
 
+const [commentContent, setCommentContent] = useState('')
+const addComment = () => {
+  Near.call(config.contractId, 'add_comment', {
+    account_id: contractId,
+    content: commentContent,
+  })
+}
+
+const CommentsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 32px;
+`
+
 return (
-  <>
-    {comments ? (
-      comments.map((comment, i) => (
-        <div key={i}>
+  <CommentsContainer>
+    <CHStack>
+      <input
+        onChange={(e) => setCommentContent(e.target.value)}
+        value={commentContent}
+      />
+      <button onClick={addComment}>send</button>
+    </CHStack>
+    <CommentsContainer>
+      {comments ? (
+        comments.map((comment, i) => (
           <Widget
-            src={`${config.ownerId}/widget/SourceScan.Web3.CommentBox`}
+            key={i}
+            src={`${config.ownerId}/widget/SourceScan.Web3.CommentView`}
             props={{ comment: comment }}
           />
-        </div>
-      ))
-    ) : (
-      <Widget
-        src={`${config.ownerId}/widget/SourceScan.Common.Spinner`}
-        props={{ width: '20px', height: '20px' }}
-      />
-    )}
-  </>
+        ))
+      ) : (
+        <Widget
+          src={`${config.ownerId}/widget/SourceScan.Common.Spinner`}
+          props={{ width: '20px', height: '20px' }}
+        />
+      )}
+    </CommentsContainer>
+  </CommentsContainer>
 )
