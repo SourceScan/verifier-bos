@@ -69,6 +69,7 @@ const Main = styled.div`
   align-items: start;
   justify-content: start;
   gap: 30px;
+  width: 50%;
 
   @media only screen and (max-width: 750px) {
     text-align: center;
@@ -266,6 +267,11 @@ const formatSourceCodePath = (path) => {
   return segments.join('/')
 }
 
+const [showComments, setShowComments] = useState(false)
+const handleCommentsClick = () => {
+  setShowComments((prev) => !prev)
+}
+
 return (
   <Center>
     {!state.contract ? (
@@ -290,13 +296,22 @@ return (
           </A>
         </HStack>
         <Widget
-          src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Votes`}
-          props={{ contractId: props.contractId, contract: state.contract }}
+          src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Social`}
+          props={{
+            contractId: props.contractId,
+            contract: state.contract,
+            onCommentsClick: handleCommentsClick,
+          }}
         />
-        <Widget
-          src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Comments`}
-          props={{ contractId: props.contractId, contract: state.contract }}
-        />
+        {showComments ? (
+          <Stack>
+            <UHeading>Comments</UHeading>
+            <Widget
+              src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Comments`}
+              props={{ contractId: props.contractId, contract: state.contract }}
+            />
+          </Stack>
+        ) : null}
         <Stack>
           <UHeading>Security Checks</UHeading>
           <Stack>

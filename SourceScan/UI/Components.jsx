@@ -45,6 +45,13 @@ const HStack = styled.div`
   gap: 10px;
 `
 
+const BHStack = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
+`
+
 const CStack = styled.div`
   display: flex;
   flex-direction: column;
