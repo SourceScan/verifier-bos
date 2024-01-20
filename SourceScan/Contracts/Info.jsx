@@ -290,11 +290,11 @@ return (
           </A>
         </HStack>
         <Widget
-          src={`${state.ownerId}/widget/SourceScan.Inputs.Web3.Contract.Votes`}
+          src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Votes`}
           props={{ contractId: props.contractId, contract: state.contract }}
         />
         <Widget
-          src={`${state.ownerId}/widget/SourceScan.Inputs.Web3.Contract.Comments`}
+          src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Comments`}
           props={{ contractId: props.contractId, contract: state.contract }}
         />
         <Stack>

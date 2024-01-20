@@ -13,11 +13,11 @@ const contract = props.contract
 return (
   <CHStack>
     <Widget
-      src={`${config.ownerId}/widget/SourceScan.Inputs.Web3.VoteButton`}
+      src={`${config.ownerId}/widget/SourceScan.Web3.VoteContract`}
       props={{ type: `Upvote`, contract: contract, contractId: contractId }}
     />
     <Widget
-      src={`${config.ownerId}/widget/SourceScan.Inputs.Web3.VoteButton`}
+      src={`${config.ownerId}/widget/SourceScan.Web3.VoteContract`}
       props={{ type: `Downvote`, contract: contract, contractId: contractId }}
     />
   </CHStack>

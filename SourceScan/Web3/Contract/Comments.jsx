@@ -21,7 +21,7 @@ return (
       comments.map((comment, i) => (
         <div key={i}>
           <Widget
-            src={`${config.ownerId}/widget/SourceScan.Inputs.Web3.CommentBox`}
+            src={`${config.ownerId}/widget/SourceScan.Web3.CommentBox`}
             props={{ comment: comment }}
           />
         </div>

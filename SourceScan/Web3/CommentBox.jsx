@@ -28,12 +28,12 @@ return (
     <Text>{formatDate(new Date(comment.timestamp / 1000000))}</Text>
     <CHStack>
       <Widget
-        src={`${config.ownerId}/widget/SourceScan.Inputs.Web3.VoteButton`}
-        props={{ type: `Upvote`, contract: contract, contractId: contractId }}
+        src={`${config.ownerId}/widget/SourceScan.Web3.VoteComment`}
+        props={{ type: `Upvote`, comment: comment }}
       />
       <Widget
-        src={`${config.ownerId}/widget/SourceScan.Inputs.Web3.VoteButton`}
-        props={{ type: `Downvote`, contract: contract, contractId: contractId }}
+        src={`${config.ownerId}/widget/SourceScan.Web3.VoteComment`}
+        props={{ type: `Downvote`, comment: comment }}
       />
     </CHStack>
   </DashedContainer>
