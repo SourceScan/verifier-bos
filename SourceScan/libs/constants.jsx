@@ -21,4 +21,6 @@ const getConfig = (network) => {
   }
 }
 
-return { getConfig }
+const limits = [5, 10, 20, 50]
+
+return { getConfig, limits }
