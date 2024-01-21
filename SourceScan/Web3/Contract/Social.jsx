@@ -1,24 +1,24 @@
 const { getConfig } = VM.require(
   `sourcescan.near/widget/SourceScan.libs.constants`
-)
+);
 if (!getConfig) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
-const config = getConfig(context.networkId)
+const config = getConfig(context.networkId);
 
 const { CommentIcon } = VM.require(
   `${config.ownerId}/widget/SourceScan.UI.Icons`
-)
+);
 const { CHStack, CStack, Text } = VM.require(
   `${config.ownerId}/widget/SourceScan.UI.Components`
-)
+);
 
 if (!CommentIcon || !CHStack || !CStack || !Text) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
 
-const contractId = props.contractId
-const contract = props.contract
+const contractId = props.contractId;
+const contract = props.contract;
 
 return (
   <>
@@ -33,10 +33,10 @@ return (
       />
       <CStack>
         <div onClick={props.onCommentsClick}>
-          <CommentIcon width={'24px'} height={'24px'} />
+          <CommentIcon width={"24px"} height={"24px"} />
         </div>
         <Text>{contract.comments.length}</Text>
       </CStack>
     </CHStack>
   </>
-)
+);

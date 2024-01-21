@@ -3,11 +3,11 @@ const UpVoteIcon = (width, height) => {
     width: ${width};
     height: ${height};
     cursor: pointer;
-  `
+  `;
   return (
     <OverlayTrigger
-      key={'arrow-up-icon-tooltip'}
-      placement={'top'}
+      key={"arrow-up-icon-tooltip"}
+      placement={"top"}
       overlay={<Tooltip id={`tooltip-arrow-up`}>Upvote</Tooltip>}
     >
       <SVG fill="none" stroke-width="1.5" stroke="currentColor">
@@ -18,20 +18,20 @@ const UpVoteIcon = (width, height) => {
         />
       </SVG>
     </OverlayTrigger>
-  )
-}
+  );
+};
 
 const DownVoteIcon = (width, height) => {
   const SVG = styled.svg`
     width: ${width};
     height: ${height};
     cursor: pointer;
-  `
+  `;
 
   return (
     <OverlayTrigger
-      key={'arrow-down-icon-tooltip'}
-      placement={'top'}
+      key={"arrow-down-icon-tooltip"}
+      placement={"top"}
       overlay={<Tooltip id={`tooltip-arrow-down`}>Downvote</Tooltip>}
     >
       <SVG fill="none" stroke-width="1.5" stroke="currentColor">
@@ -42,20 +42,20 @@ const DownVoteIcon = (width, height) => {
         />
       </SVG>
     </OverlayTrigger>
-  )
-}
+  );
+};
 
 const CommentIcon = (width, height) => {
   const SVG = styled.svg`
     width: ${width};
     height: ${height};
     cursor: pointer;
-  `
+  `;
 
   return (
     <OverlayTrigger
-      key={'comment-icon-tooltip'}
-      placement={'top'}
+      key={"comment-icon-tooltip"}
+      placement={"top"}
       overlay={<Tooltip id={`tooltip-comment`}>Comments</Tooltip>}
     >
       <SVG fill="none" stroke-width="1.5" stroke="currentColor">
@@ -66,7 +66,7 @@ const CommentIcon = (width, height) => {
         />
       </SVG>
     </OverlayTrigger>
-  )
-}
+  );
+};
 
-return { UpVoteIcon, DownVoteIcon, CommentIcon }
+return { UpVoteIcon, DownVoteIcon, CommentIcon };

@@ -1,26 +1,26 @@
 const { getConfig, limits } = VM.require(
   `sourcescan.near/widget/SourceScan.libs.constants`
-)
+);
 if (!getConfig) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
-const config = getConfig(context.networkId)
-const contractId = props.contractId
+const config = getConfig(context.networkId);
+const contractId = props.contractId;
 
 const { useTheme } = VM.require(
   `${config.ownerId}/widget/SourceScan.libs.theme`
-)
+);
 if (!useTheme) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
-const theme = useTheme(Storage.privateGet('theme'))
+const theme = useTheme(Storage.get("theme"));
 
 const { CStack, Text } = VM.require(
   `${config.ownerId}/widget/SourceScan.UI.Components`
-)
+);
 
 if (!CStack || !Text) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
 
 const Input = styled.input`
@@ -38,7 +38,7 @@ const Input = styled.input`
   :hover {
     border: 1px solid ${theme.hover.border};
   }
-`
+`;
 
 const Button = styled.button`
   height: 36px;
@@ -55,19 +55,19 @@ const Button = styled.button`
   :hover {
     background-color: ${theme.hover.bg};
   }
-`
+`;
 
 const addComment = () => {
-  Near.call(config.contractId, 'add_comment', {
+  Near.call(config.contractId, "add_comment", {
     account_id: contractId,
     content: value,
-  })
-}
+  });
+};
 
-const [value, setValue] = useState('')
+const [value, setValue] = useState("");
 const handleChange = (e) => {
-  setValue(e.target.value)
-}
+  setValue(e.target.value);
+};
 
 return (
   <CStack>
@@ -75,4 +75,4 @@ return (
     <Input onChange={handleChange} value={value} autoFocus />
     <Button onClick={addComment}>post</Button>
   </CStack>
-)
+);

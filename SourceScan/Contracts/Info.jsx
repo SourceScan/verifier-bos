@@ -1,60 +1,60 @@
 const useNetwork = (mainnet, testnet) => {
-  return context.networkId === 'mainnet' ? mainnet : testnet
-}
+  return context.networkId === "mainnet" ? mainnet : testnet;
+};
 
 State.init({
   verifierId:
-    props.verifierId || useNetwork('sourcescan.near', 'sourcescan.testnet'),
-  ownerId: useNetwork('sourcescan.near', 'sourcescan.testnet'),
-  apiHost: props.apiHost || 'https://sourcescan-api.2bb.dev',
+    props.verifierId || useNetwork("sourcescan.near", "sourcescan.testnet"),
+  ownerId: useNetwork("sourcescan.near", "sourcescan.testnet"),
+  apiHost: props.apiHost || "https://sourcescan-api.2bb.dev",
   appUrl:
     props.appUrl ||
-    useNetwork('https://sourcescan.dev', 'https://testnet.sourcescan.dev'),
+    useNetwork("https://sourcescan.dev", "https://testnet.sourcescan.dev"),
   rpcUrl: useNetwork(
-    'https://rpc.mainnet.near.org',
-    'https://rpc.testnet.near.org'
+    "https://rpc.mainnet.near.org",
+    "https://rpc.testnet.near.org"
   ),
   theme: props.theme || {
-    bg: '#e3e8ef',
-    color: '#4c5566',
-    border: '1px dashed #748094',
+    bg: "#e3e8ef",
+    color: "#4c5566",
+    border: "1px dashed #748094",
     text: {
-      fontSize: '16px',
+      fontSize: "16px",
     },
     heading: {
-      fontSize: '18px',
-      fontWeight: '600',
+      fontSize: "18px",
+      fontWeight: "600",
       underline: true,
     },
   },
   contract: null,
   wasm: { value: null, error: false },
   tx: { value: null, error: false },
-})
+});
 
 const getContract = async () => {
-  Near.asyncView(state.verifierId, 'get_contract', {
+  Near.asyncView(state.verifierId, "get_contract", {
     account_id: props.contractId,
   })
     .then((res) => {
       State.update({
         contract: res,
-      })
+      });
     })
     .catch((err) => {
-      console.log(err)
-    })
-}
+      console.log(err);
+    });
+};
 
 if (!props.contractId) {
   return (
     <Widget
       src={`${state.ownerId}/widget/SourceScan.Common.ErrorAlert`}
-      props={{ message: 'Please provide a contractId to component' }}
+      props={{ message: "Please provide a contractId to component" }}
     />
-  )
+  );
 } else {
-  getContract()
+  getContract();
 }
 
 const Main = styled.div`
@@ -77,7 +77,7 @@ const Main = styled.div`
     justify-content: center;
     width: 95%;
   }
-`
+`;
 
 const Stack = styled.div`
   width: 100%;
@@ -94,7 +94,7 @@ const Stack = styled.div`
     align-items: center;
     justify-content: center;
   }
-`
+`;
 
 const CStack = styled.div`
   width: 100%;
@@ -108,7 +108,7 @@ const CStack = styled.div`
   @media only screen and (max-width: 750px) {
     width: 90%;
   }
-`
+`;
 
 const HStack = styled.div`
   width: 100%;
@@ -125,7 +125,7 @@ const HStack = styled.div`
     align-items: center;
     justify-content: center;
   }
-`
+`;
 
 const CHStack = styled.div`
   width: 100%;
@@ -139,30 +139,30 @@ const CHStack = styled.div`
   @media only screen and (max-width: 750px) {
     width: 90%;
   }
-`
+`;
 
 const UHeading = styled.div`
   font-size: ${state.theme.heading.fontSize};
   font-weight: ${state.theme.heading.fontWeight};
-  text-decoration: ${state.theme.heading.underline ? 'underline' : 'none'};
+  text-decoration: ${state.theme.heading.underline ? "underline" : "none"};
   -webkit-text-decoration-line: ${state.theme.heading.underline
-    ? 'underline'
-    : 'none'};
+    ? "underline"
+    : "none"};
   text-underline-offset: 6px;
   text-decoration-style: dashed;
   text-decoration-color: gray;
-`
+`;
 
 const TooltipText = styled.div`
   cursor: pointer;
   font-size: ${state.theme.text.fontSize};
   color: ${state.theme.color};
-`
+`;
 
 const Heading = styled.div`
   font-size: ${state.theme.heading.fontSize};
   font-weight: ${state.theme.heading.fontWeight};
-`
+`;
 
 const Desktop = styled.div`
   display: flex;
@@ -170,7 +170,7 @@ const Desktop = styled.div`
   @media only screen and (max-width: 750px) {
     display: none;
   }
-`
+`;
 
 const Mobile = styled.div`
   display: none;
@@ -178,12 +178,12 @@ const Mobile = styled.div`
   @media only screen and (max-width: 750px) {
     display: flex;
   }
-`
+`;
 
 const Text = styled.div`
   font-size: ${state.theme.text.fontSize};
   color: ${state.theme.color};
-`
+`;
 
 const Center = styled.div`
   width: 100%;
@@ -194,7 +194,7 @@ const Center = styled.div`
   @media only screen and (max-width: 750px) {
     width: 90%;
   }
-`
+`;
 
 const EPContainer = styled.div`
   max-width: 100%;
@@ -202,7 +202,7 @@ const EPContainer = styled.div`
   @media only screen and (max-width: 750px) {
     max-width: 90%;
   }
-`
+`;
 
 const A = styled.a`
   text-decoration: none;
@@ -212,43 +212,43 @@ const A = styled.a`
     text-decoration: none;
     color: ${state.theme.color};
   }
-`
+`;
 
 const truncateStringInMiddle = (str, maxLength) => {
   if (str.length <= maxLength) {
-    return str
+    return str;
   }
 
-  const halfMaxLength = Math.floor(maxLength / 2)
-  const firstHalf = str.slice(0, halfMaxLength)
-  const secondHalf = str.slice(-halfMaxLength)
+  const halfMaxLength = Math.floor(maxLength / 2);
+  const firstHalf = str.slice(0, halfMaxLength);
+  const secondHalf = str.slice(-halfMaxLength);
 
-  return firstHalf + '...' + secondHalf
-}
+  return firstHalf + "..." + secondHalf;
+};
 
 const truncateAfterSplit = (str, maxLength) => {
-  const [firstPart, secondPart] = str.split('@')
+  const [firstPart, secondPart] = str.split("@");
 
-  return firstPart + '@' + truncateStringInMiddle(secondPart, maxLength)
-}
+  return firstPart + "@" + truncateStringInMiddle(secondPart, maxLength);
+};
 
 const compareCodeHash = () => {
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      jsonrpc: '2.0',
-      id: 'dontcare',
-      method: 'query',
+      jsonrpc: "2.0",
+      id: "dontcare",
+      method: "query",
       params: {
-        request_type: 'view_code',
-        finality: 'final',
+        request_type: "view_code",
+        finality: "final",
         account_id: props.contractId,
       },
     }),
-  }
+  };
   asyncFetch(state.rpcUrl, options)
     .then((rpc_res) => {
       if (rpc_res.body.result.hash === state.contract.code_hash) {
@@ -257,14 +257,14 @@ const compareCodeHash = () => {
             value: true,
             error: false,
           },
-        })
+        });
       } else {
         State.update({
           wasm: {
             value: false,
             error: false,
           },
-        })
+        });
       }
     })
     .catch((err) => {
@@ -273,38 +273,38 @@ const compareCodeHash = () => {
           value: null,
           error: true,
         },
-      })
-      console.log(err)
-    })
-}
+      });
+      console.log(err);
+    });
+};
 
 if (state.contract) {
-  compareCodeHash()
+  compareCodeHash();
 }
 
 const formatSourceCodePath = (path) => {
-  let segments = path.split('/')
+  let segments = path.split("/");
 
-  segments.shift()
-  segments.pop()
-  if (state.contract.lang === 'rust') {
-    segments.push('src', 'lib.rs')
+  segments.shift();
+  segments.pop();
+  if (state.contract.lang === "rust") {
+    segments.push("src", "lib.rs");
   }
 
-  return segments.join('/')
-}
+  return segments.join("/");
+};
 
-const [showComments, setShowComments] = useState(false)
+const [showComments, setShowComments] = useState(false);
 const handleCommentsClick = () => {
-  setShowComments((prev) => !prev)
-}
+  setShowComments((prev) => !prev);
+};
 
 return (
   <Center>
     {!state.contract ? (
       <Widget
         src={`${state.ownerId}/widget/SourceScan.Common.Spinner`}
-        props={{ width: '64px', height: '64px' }}
+        props={{ width: "64px", height: "64px" }}
       />
     ) : (
       <CStack>
@@ -313,13 +313,13 @@ return (
             <Heading>{props.contractId}</Heading>
             <A
               href={`https://${
-                context.networkId === 'mainnet' ? '' : 'testnet.'
+                context.networkId === "mainnet" ? "" : "testnet."
               }nearblocks.io/address/${props.contractId}`}
-              target={'_blank'}
+              target={"_blank"}
             >
               <Widget
                 src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
-                props={{ width: '18px', height: '18px' }}
+                props={{ width: "18px", height: "18px" }}
               />
             </A>
           </CHStack>
@@ -364,11 +364,11 @@ return (
                   <Widget
                     src={`${state.ownerId}/widget/SourceScan.Common.Icons.CheckIcon`}
                     props={{
-                      width: '20px',
-                      height: '20px',
+                      width: "20px",
+                      height: "20px",
                       tooltip: {
                         placement: props.placement,
-                        label: 'Approved',
+                        label: "Approved",
                       },
                     }}
                   />
@@ -376,17 +376,17 @@ return (
                   <Widget
                     src={`${state.ownerId}/widget/SourceScan.Common.Icons.CrossIcon`}
                     props={{
-                      width: '20px',
-                      height: '20px',
+                      width: "20px",
+                      height: "20px",
                       tooltip: {
                         placement: props.placement,
-                        label: state.wasm.error ? 'Error' : 'Not approved',
+                        label: state.wasm.error ? "Error" : "Not approved",
                       },
                     }}
                   />
                 )}
                 <Text>
-                  Wasm Code {state.wasm.value ? 'Matches' : 'Mismatches'}
+                  Wasm Code {state.wasm.value ? "Matches" : "Mismatches"}
                 </Text>
               </HStack>
             </Stack>
@@ -401,11 +401,11 @@ return (
                 }/tree/${state.contract.github.sha}/${formatSourceCodePath(
                   state.contract.entry_point
                 )}`}
-                target={'_blank'}
+                target={"_blank"}
               >
                 <Widget
                   src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
-                  props={{ width: '18px', height: '18px' }}
+                  props={{ width: "18px", height: "18px" }}
                 />
               </A>
             </HStack>
@@ -414,11 +414,11 @@ return (
                 <Text>Code Viewer(IPFS)</Text>
                 <A
                   href={`${state.appUrl}/code/${props.contractId}`}
-                  target={'_blank'}
+                  target={"_blank"}
                 >
                   <Widget
                     src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
-                    props={{ width: '18px', height: '18px' }}
+                    props={{ width: "18px", height: "18px" }}
                   />
                 </A>
               </HStack>
@@ -438,13 +438,13 @@ return (
           <Stack>
             <UHeading>Builder image</UHeading>
             <OverlayTrigger
-              key={'top'}
-              placement={'top'}
+              key={"top"}
+              placement={"top"}
               overlay={<Tooltip id={`tooltip-top`}>Copy</Tooltip>}
             >
               <TooltipText
                 onClick={() => {
-                  clipboard.writeText(state.contract.builder_image)
+                  clipboard.writeText(state.contract.builder_image);
                 }}
               >
                 {truncateAfterSplit(state.contract.builder_image, 8)}
@@ -459,7 +459,7 @@ return (
           </Stack>
           <Stack>
             <UHeading>Lang</UHeading>
-            <Text>{state.contract.lang === 'ts' ? 'TypeScript' : 'Rust'}</Text>
+            <Text>{state.contract.lang === "ts" ? "TypeScript" : "Rust"}</Text>
           </Stack>
           {state.contract.cid ? (
             <Stack>
@@ -473,11 +473,11 @@ return (
                 </Mobile>
                 <A
                   href={`${state.apiHost}/ipfs/${state.contract.cid}`}
-                  target={'_blank'}
+                  target={"_blank"}
                 >
                   <Widget
                     src={`${state.ownerId}/widget/SourceScan.Common.Icons.LinkIcon`}
-                    props={{ width: '18px', height: '18px' }}
+                    props={{ width: "18px", height: "18px" }}
                   />
                 </A>
               </HStack>
@@ -494,7 +494,7 @@ return (
                     color: state.theme.color,
                     heading: {
                       fontSize: state.heading.fontSize,
-                      fontWeight: '800',
+                      fontWeight: "800",
                     },
                   },
                 }}
@@ -505,4 +505,4 @@ return (
       </CStack>
     )}
   </Center>
-)
+);

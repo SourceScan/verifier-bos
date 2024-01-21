@@ -1,33 +1,33 @@
 const useNetwork = (mainnet, testnet) => {
-  return context.networkId === 'mainnet' ? mainnet : testnet
-}
+  return context.networkId === "mainnet" ? mainnet : testnet;
+};
 
 State.init({
   appUrl: props.appUrl,
   apiHost: props.apiHost,
-  ownerId: useNetwork('sourcescan.near', 'sourcescan.testnet'),
+  ownerId: useNetwork("sourcescan.near", "sourcescan.testnet"),
   theme: props.theme || {
-    name: 'light',
-    bg: '#e3e8ef',
-    color: '#4c5566',
-    border: '#748094',
+    name: "light",
+    bg: "#e3e8ef",
+    color: "#4c5566",
+    border: "#748094",
     hover: {
-      bg: '#eef2f6',
-      border: '#d8dfe7',
+      bg: "#eef2f6",
+      border: "#d8dfe7",
     },
     text: {
-      fontSize: '16px',
+      fontSize: "16px",
     },
     heading: {
-      fontSize: '18px',
-      fontWeight: '600',
+      fontSize: "18px",
+      fontWeight: "600",
     },
   },
   github: props.github,
   accessToken: props.accessToken,
   files: props.files,
   entryPoint: null,
-  lang: 'rust',
+  lang: "rust",
   loading: false,
   verifyLoading: false,
   verifyError: null,
@@ -38,12 +38,12 @@ State.init({
   builderImage: null,
   dockerTutorial: false,
   uploadToIpfs: false,
-})
+});
 
 const clearState = () => {
   State.update({
     entryPoint: null,
-    lang: 'rust',
+    lang: "rust",
     loading: false,
     error: false,
     gatewayKey: null,
@@ -53,31 +53,31 @@ const clearState = () => {
     uploadToIpfs: false,
     verifyError: null,
     verifyLoading: false,
-  })
-}
+  });
+};
 
 if (!props.github) {
-  ;<Widget
+  <Widget
     src={`${state.ownerId}/widget/SourceScan.Common.ErrorAlert`}
     props={{
       message:
-        'Please provide github: {repo: string, owner: string, sha: string} to the component',
+        "Please provide github: {repo: string, owner: string, sha: string} to the component",
     }}
-  />
+  />;
 } else if (!props.accessToken) {
-  ;<Widget
+  <Widget
     src={`${state.ownerId}/widget/SourceScan.Common.ErrorAlert`}
     props={{
-      message: 'Please provide accessToken: string to the component',
+      message: "Please provide accessToken: string to the component",
     }}
-  />
+  />;
 } else if (!props.files) {
-  ;<Widget
+  <Widget
     src={`${state.ownerId}/widget/SourceScan.Common.ErrorAlert`}
     props={{
-      message: 'Please provide files: string[] to the component',
+      message: "Please provide files: string[] to the component",
     }}
-  />
+  />;
 }
 
 const Center = styled.div`
@@ -86,7 +86,7 @@ const Center = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-`
+`;
 
 const EPContainer = styled.div`
   height: 100%;
@@ -102,7 +102,7 @@ const EPContainer = styled.div`
   @media only screen and (max-width: 750px) {
     width: 90%;
   }
-`
+`;
 
 const EntryPoint = styled.div`
   width: 100%;
@@ -114,7 +114,7 @@ const EntryPoint = styled.div`
   gap: 25px;
   padding-top: 25px;
   padding-bottom: 25px;
-`
+`;
 
 const RButton = styled.button`
   background-color: ${state.theme.bg};
@@ -122,7 +122,7 @@ const RButton = styled.button`
   width: 20px;
   height: 20px;
   border-radius: 50px;
-`
+`;
 
 const SelectedRButton = styled.button`
   background-color: ${state.theme.border};
@@ -130,7 +130,7 @@ const SelectedRButton = styled.button`
   width: 20px;
   height: 20px;
   border-radius: 50px;
-`
+`;
 
 const Text = styled.div`
   max-width: 350;
@@ -141,7 +141,7 @@ const Text = styled.div`
   @media only screen and (max-width: 750px) {
     max-width: 200px;
   }
-`
+`;
 
 const Heading = styled.div`
   font-size: ${state.theme.heading.fontSize};
@@ -151,7 +151,7 @@ const Heading = styled.div`
   @media only screen and (max-width: 750px) {
     width: 200px;
   }
-`
+`;
 
 const Stack = styled.div`
   width: 100%;
@@ -161,7 +161,7 @@ const Stack = styled.div`
   align-items: center;
   justify-content: center;
   gap: 55px;
-`
+`;
 
 const DeployStack = styled.div`
   width: 100%;
@@ -171,7 +171,7 @@ const DeployStack = styled.div`
   align-items: center;
   justify-content: center;
   gap: 25px;
-`
+`;
 
 const VerificationStack = styled.div`
   width: 100%;
@@ -185,7 +185,7 @@ const VerificationStack = styled.div`
   @media only screen and (max-width: 750px) {
     width: 20%;
   }
-`
+`;
 
 const HStack = styled.div`
   width: 100%;
@@ -195,7 +195,7 @@ const HStack = styled.div`
   align-items: center;
   justify-content: center;
   gap: 25px;
-`
+`;
 
 const HeadingStack = styled.div`
   display: flex;
@@ -204,7 +204,7 @@ const HeadingStack = styled.div`
   align-items: center;
   justify-content: center;
   gap: 15%;
-`
+`;
 
 const Select = styled.select`
   cursor: pointer;
@@ -222,7 +222,7 @@ const Select = styled.select`
   :hover {
     border: 1px solid ${state.theme.hover.border};
   }
-`
+`;
 
 const Checkbox = styled.input`
   accent-color: ${state.theme.primaryColor};
@@ -245,7 +245,7 @@ const Checkbox = styled.input`
     outline: none;
     box-shadow: 0 0 0 2px ${state.theme.focus.shadow};
   }
-`
+`;
 
 const Button = styled.button`
   font-weight: 600;
@@ -259,13 +259,13 @@ const Button = styled.button`
   :hover {
     background-color: ${state.theme.hover.bg};
   }
-`
+`;
 
 const TooltipText = styled.div`
   cursor: pointer;
   font-size: ${state.theme.text.fontSize};
   color: ${state.theme.color};
-`
+`;
 
 const A = styled.a`
   text-decoration: none;
@@ -275,39 +275,39 @@ const A = styled.a`
     text-decoration: none;
     color: ${state.theme.color};
   }
-`
+`;
 
 const handleEntryPointSelect = (file) => {
-  if (state.loading || state.gatewayKey || state.error) return
+  if (state.loading || state.gatewayKey || state.error) return;
 
   if (state.entryPoint === file) {
     State.update({
       entryPoint: null,
-    })
-    return
+    });
+    return;
   }
 
-  State.update({ entryPoint: file })
-}
+  State.update({ entryPoint: file });
+};
 
 const handleLangChange = (e) => {
-  if (state.loading || state.gatewayKey || state.error) return
+  if (state.loading || state.gatewayKey || state.error) return;
 
-  State.update({ lang: e.target.value })
-}
+  State.update({ lang: e.target.value });
+};
 
 const handleKeyGen = () => {
-  if (state.loading || state.gatewayKey || !props.contractId) return
+  if (state.loading || state.gatewayKey || !props.contractId) return;
 
   State.update({
     loading: true,
-  })
+  });
 
   asyncFetch(`${state.apiHost}/api/gateway/genKey`, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({
       accessToken: state.accessToken,
       lang: state.lang,
@@ -318,90 +318,90 @@ const handleKeyGen = () => {
   })
     .then((res) => {
       if (res.status !== 200) {
-        State.update({ error: true })
+        State.update({ error: true });
       } else {
         State.update({
           gatewayKey: res.body,
-        })
+        });
       }
     })
     .finally(() => {
-      State.update({ loading: false })
-    })
-}
+      State.update({ loading: false });
+    });
+};
 
 const getBuilderImageInfo = () => {
-  if (state.loading || state.error || !props.contractId) return
+  if (state.loading || state.error || !props.contractId) return;
 
   State.update({
     loading: true,
-  })
+  });
 
   asyncFetch(`${state.apiHost}/api/verify/builderInfo`, {
-    method: 'GET',
+    method: "GET",
   })
     .then((res) => {
       if (res.status !== 200) {
-        clearState()
-        State.update({ error: true })
+        clearState();
+        State.update({ error: true });
       } else {
         State.update({
           builderImage: res.body.builderImage,
-        })
+        });
       }
     })
     .finally(() => {
-      State.update({ loading: false })
-    })
-}
+      State.update({ loading: false });
+    });
+};
 
 const truncateStringInMiddle = (str, maxLength) => {
   if (str.length <= maxLength) {
-    return str
+    return str;
   }
 
-  const halfMaxLength = Math.floor(maxLength / 2)
-  const firstHalf = str.slice(0, halfMaxLength)
-  const secondHalf = str.slice(-halfMaxLength)
+  const halfMaxLength = Math.floor(maxLength / 2);
+  const firstHalf = str.slice(0, halfMaxLength);
+  const secondHalf = str.slice(-halfMaxLength);
 
-  return firstHalf + '...' + secondHalf
-}
+  return firstHalf + "..." + secondHalf;
+};
 
 const handleVerificationSelect = (verification) => {
-  if (verification === 'Docker') getBuilderImageInfo()
+  if (verification === "Docker") getBuilderImageInfo();
 
   State.update({
     verification: verification,
-  })
-}
+  });
+};
 
 const truncateAfterSplit = (str, maxLength) => {
-  const [firstPart, secondPart] = str.split('@')
+  const [firstPart, secondPart] = str.split("@");
 
-  return firstPart + '@' + truncateStringInMiddle(secondPart, maxLength)
-}
+  return firstPart + "@" + truncateStringInMiddle(secondPart, maxLength);
+};
 
 const handleDockerCheckBoxChange = () => {
-  State.update({ dockerTutorial: !state.dockerTutorial })
-}
+  State.update({ dockerTutorial: !state.dockerTutorial });
+};
 
 const handleIPFSCheckBoxChange = () => {
-  State.update({ uploadToIpfs: !state.uploadToIpfs })
-}
+  State.update({ uploadToIpfs: !state.uploadToIpfs });
+};
 
 const verify = () => {
-  if (state.verifyLoading || !props.contractId) return
+  if (state.verifyLoading || !props.contractId) return;
 
   State.update({
     verifyLoading: true,
-  })
+  });
 
   asyncFetch(`${state.apiHost}/api/verify/${state.lang}`, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${state.accessToken}`,
     },
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({
       accountId: props.contractId,
       networkId: context.networkId,
@@ -411,20 +411,20 @@ const verify = () => {
     }),
   })
     .then((res) => {
-      if (res.body.message !== 'Contract verified successfully') {
+      if (res.body.message !== "Contract verified successfully") {
         State.update({
-          verifyError: res.body.message ? res.body.message : 'Error ocurred',
-        })
+          verifyError: res.body.message ? res.body.message : "Error ocurred",
+        });
       } else {
         State.update({
           verifySuccess: res.body.message,
-        })
+        });
       }
     })
     .finally(() => {
-      State.update({ verifyLoading: false })
-    })
-}
+      State.update({ verifyLoading: false });
+    });
+};
 
 return (
   <Stack>
@@ -446,57 +446,57 @@ return (
         <Heading>4. What to compile</Heading>
         <Select onChange={(e) => handleLangChange(e)}>
           <option
-            value={'rust'}
-            selected={state.lang === 'rust'}
+            value={"rust"}
+            selected={state.lang === "rust"}
             disabled={state.loading || state.error}
           >
             Rust
           </option>
-          <option value={'ts'} selected={state.lang === 'ts'} disabled={true}>
+          <option value={"ts"} selected={state.lang === "ts"} disabled={true}>
             TypeScript
           </option>
         </Select>
         <Heading>5. How to verify</Heading>
         <VerificationStack>
-          <div onClick={() => handleVerificationSelect('Docker')}>
+          <div onClick={() => handleVerificationSelect("Docker")}>
             <Widget
               src={`${state.ownerId}/widget/SourceScan.Common.Icons.DockerIcon`}
               props={{
-                width: '40px',
-                height: '40px',
+                width: "40px",
+                height: "40px",
               }}
             />
           </div>
           <Heading>or</Heading>
-          <div onClick={() => handleVerificationSelect('FAK')}>
+          <div onClick={() => handleVerificationSelect("FAK")}>
             <Widget
               src={`${state.ownerId}/widget/SourceScan.Common.Icons.KeyIcon`}
               props={{
-                width: '32px',
-                height: '32px',
+                width: "32px",
+                height: "32px",
               }}
             />
           </div>
         </VerificationStack>
-        {state.verification === 'Docker' ? (
+        {state.verification === "Docker" ? (
           <>
             {state.loading ? (
               <Widget
                 src={`${state.ownerId}/widget/SourceScan.Common.Spinner`}
-                props={{ width: '20px', height: '20px' }}
+                props={{ width: "20px", height: "20px" }}
               />
             ) : (
               <>
                 <HStack>
-                  <Text>{'Builder image: '}</Text>
+                  <Text>{"Builder image: "}</Text>
                   <OverlayTrigger
-                    key={'top'}
-                    placement={'top'}
+                    key={"top"}
+                    placement={"top"}
                     overlay={<Tooltip id={`tooltip-top`}>Copy</Tooltip>}
                   >
                     <TooltipText
                       onClick={() => {
-                        clipboard.writeText(state.builderImage)
+                        clipboard.writeText(state.builderImage);
                       }}
                     >
                       {truncateAfterSplit(state.builderImage, 8)}
@@ -513,9 +513,9 @@ return (
                     <Text>All steps done from</Text>
                     <a
                       href={
-                        'https://docs.sourcescan.dev/tutorials/docker-verification'
+                        "https://docs.sourcescan.dev/tutorials/docker-verification"
                       }
-                      target={'_blank'}
+                      target={"_blank"}
                     >
                       tutorial
                     </a>
@@ -534,11 +534,11 @@ return (
                 {state.dockerTutorial ? (
                   <Button onClick={verify} disabled={state.verifyLoading}>
                     {!state.verifyLoading ? (
-                      'Verify'
+                      "Verify"
                     ) : (
                       <Widget
                         src={`${state.ownerId}/widget/SourceScan.Common.Spinner`}
-                        props={{ width: '20px', height: '20px' }}
+                        props={{ width: "20px", height: "20px" }}
                       />
                     )}
                   </Button>
@@ -561,14 +561,14 @@ return (
               </>
             )}
           </>
-        ) : state.verification === 'FAK' ? (
+        ) : state.verification === "FAK" ? (
           state.gatewayKey ? (
             <DeployStack>
               <A
                 href={`${state.appUrl}/gateway?key=${encodeURIComponent(
                   state.gatewayKey
                 )}`}
-                target={'_blank'}
+                target={"_blank"}
               >
                 <Button>Gateway</Button>
               </A>
@@ -577,11 +577,11 @@ return (
             <>
               <Button onClick={handleKeyGen} disabled={state.loading}>
                 {!state.loading ? (
-                  'Generate Key'
+                  "Generate Key"
                 ) : (
                   <Widget
                     src={`${state.ownerId}/widget/SourceScan.Common.Spinner`}
-                    props={{ width: '20px', height: '20px' }}
+                    props={{ width: "20px", height: "20px" }}
                   />
                 )}
               </Button>
@@ -589,7 +589,7 @@ return (
                 <Widget
                   src={`${state.ownerId}/widget/SourceScan.Common.ErrorAlert`}
                   props={{
-                    message: 'Error ocurred during key generation',
+                    message: "Error ocurred during key generation",
                   }}
                 />
               ) : null}
@@ -599,4 +599,4 @@ return (
       </>
     ) : null}
   </Stack>
-)
+);

@@ -1,17 +1,17 @@
-const placement = props.placement || 'top'
-const label = props.label || 'Contracts per page'
-const limits = props.limits || [10, 20, 50]
+const placement = props.placement || "top";
+const label = props.label || "Contracts per page";
+const limits = props.limits || [10, 20, 50];
 const theme = props.theme || {
-  name: 'light',
-  bg: '#e3e8ef',
-  color: '#4c5566',
-  border: '#748094',
+  name: "light",
+  bg: "#e3e8ef",
+  color: "#4c5566",
+  border: "#748094",
   hover: {
-    bg: '#eef2f6',
-    border: '#d8dfe7',
+    bg: "#eef2f6",
+    border: "#d8dfe7",
   },
-}
-const selectedLimit = props.selectedLimit || props.limits[0] || 10
+};
+const selectedLimit = props.selectedLimit || props.limits[0] || 10;
 
 const Select = styled.select`
   border: 1px solid ${theme.border};
@@ -28,7 +28,7 @@ const Select = styled.select`
   :hover {
     border: 1px solid ${theme.hover.border};
   }
-`
+`;
 
 return (
   <OverlayTrigger
@@ -44,4 +44,4 @@ return (
       ))}
     </Select>
   </OverlayTrigger>
-)
+);

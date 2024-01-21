@@ -1,26 +1,26 @@
 const { getConfig } = VM.require(
   `sourcescan.near/widget/SourceScan.libs.constants`
-)
+);
 if (!getConfig) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
-const config = getConfig(context.networkId)
-const comment = props.comment
+const config = getConfig(context.networkId);
+const comment = props.comment;
 
 const { useTheme } = VM.require(
   `${config.ownerId}/widget/SourceScan.libs.theme`
-)
+);
 if (!useTheme) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
-const theme = useTheme(Storage.privateGet('theme'))
+const theme = useTheme(Storage.get("theme"));
 
 const { CStack, CHStack, Text } = VM.require(
   `${config.ownerId}/widget/SourceScan.UI.Components`
-)
+);
 
 if (!CStack || !CHStack || !Text) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
 
 const CommentContainer = styled.div`
@@ -42,21 +42,21 @@ const CommentContainer = styled.div`
     justify-content: center;
     width: 95%;
   }
-`
+`;
 
 const formatDate = (date) => {
   return date
-    .toLocaleString('en-GB', {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
+    .toLocaleString("en-GB", {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
       hour12: false,
     })
-    .replace(/\//g, '.')
-    .replace(',', '')
-}
+    .replace(/\//g, ".")
+    .replace(",", "");
+};
 
 return (
   <CommentContainer>
@@ -74,4 +74,4 @@ return (
       />
     </CHStack>
   </CommentContainer>
-)
+);

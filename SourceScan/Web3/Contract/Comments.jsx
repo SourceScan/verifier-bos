@@ -1,52 +1,52 @@
 const { getConfig, limits } = VM.require(
   `sourcescan.near/widget/SourceScan.libs.constants`
-)
+);
 if (!getConfig) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
-const config = getConfig(context.networkId)
-const contractId = props.contractId
+const config = getConfig(context.networkId);
+const contractId = props.contractId;
 
 const { useTheme } = VM.require(
   `${config.ownerId}/widget/SourceScan.libs.theme`
-)
+);
 if (!useTheme) {
-  return <div>loading...</div>
+  return <div>loading...</div>;
 }
-const theme = useTheme(Storage.privateGet('theme'))
+const theme = useTheme(Storage.get("theme"));
 
-const [limit, setLimit] = useState(limits[0])
-const [selectedPage, setSelectedPage] = useState(1)
-const [fromIndex, setFromIndex] = useState(0)
+const [limit, setLimit] = useState(limits[0]);
+const [selectedPage, setSelectedPage] = useState(1);
+const [fromIndex, setFromIndex] = useState(0);
 const handleOptionsChange = (e) => {
-  setLimit(parseInt(e.target.value))
-  setSelectedPage(1)
-  setFromIndex(0)
-}
+  setLimit(parseInt(e.target.value));
+  setSelectedPage(1);
+  setFromIndex(0);
+};
 
 const handlePageChange = (x) => {
-  setSelectedPage(x + 1)
-  setFromIndex(x * limit)
-}
+  setSelectedPage(x + 1);
+  setFromIndex(x * limit);
+};
 
-const [pages, setPages] = useState(1)
-const [comments, setComments] = useState(null)
+const [pages, setPages] = useState(1);
+const [comments, setComments] = useState(null);
 useEffect(() => {
-  if (!contractId) return
+  if (!contractId) return;
 
-  Near.asyncView(config.contractId, 'get_comments', {
+  Near.asyncView(config.contractId, "get_comments", {
     account_id: contractId,
     from_index: fromIndex,
     limit: limit,
   })
     .then((res) => {
-      setComments(res[0])
-      setPages(res[1])
+      setComments(res[0]);
+      setPages(res[1]);
     })
     .catch((err) => {
-      console.log(err)
-    })
-}, [contractId, limit, selectedPage, fromIndex])
+      console.log(err);
+    });
+}, [contractId, limit, selectedPage, fromIndex]);
 
 const CommentsContainer = styled.div`
   width: 100%;
@@ -56,14 +56,14 @@ const CommentsContainer = styled.div`
   justify-content: center;
   text-align: center;
   gap: 32px;
-`
+`;
 
 return (
   <CommentsContainer>
     <Widget
       src={`${config.ownerId}/widget/SourceScan.Inputs.Limits`}
       props={{
-        label: 'Comments per page',
+        label: "Comments per page",
         handleOptionsChange: handleOptionsChange,
         theme: theme,
         limits: limits,
@@ -81,7 +81,7 @@ return (
     ) : (
       <Widget
         src={`${config.ownerId}/widget/SourceScan.Common.Spinner`}
-        props={{ width: '20px', height: '20px' }}
+        props={{ width: "20px", height: "20px" }}
       />
     )}
     <Widget
@@ -94,4 +94,4 @@ return (
       }}
     />
   </CommentsContainer>
-)
+);

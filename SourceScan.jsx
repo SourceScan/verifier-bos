@@ -32,7 +32,7 @@ const getConfig = (network) => {
 };
 
 State.init({
-  theme: Storage.privateGet("theme") || "light",
+  theme: Storage.get("theme"),
   from_index: 0,
   limit: limits[0],
   contracts: null,
@@ -147,7 +147,7 @@ const switchTheme = () => {
   State.update({
     theme: themeToChange,
   });
-  Storage.privateSet("theme", themeToChange);
+  Storage.set("theme", themeToChange);
 };
 
 const handleSubmit = (value) => {
@@ -174,7 +174,7 @@ const searchContracts = async () => {
 
 if (!state.contracts) searchContracts();
 
-const localStorageTheme = Storage.privateGet("theme");
+const localStorageTheme = Storage.get("theme");
 if (localStorageTheme)
   State.update({
     theme: localStorageTheme,
