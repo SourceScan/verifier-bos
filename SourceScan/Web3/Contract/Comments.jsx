@@ -34,7 +34,6 @@ useEffect(() => {
     limit: limit,
   })
     .then((res) => {
-      console.log(res)
       setComments(res[0])
       setPages(res[1])
     })

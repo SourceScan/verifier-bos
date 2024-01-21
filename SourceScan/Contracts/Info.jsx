@@ -279,7 +279,6 @@ const compareCodeHash = () => {
 }
 
 if (state.contract) {
-  console.log(state.contract)
   compareCodeHash()
 }
 
