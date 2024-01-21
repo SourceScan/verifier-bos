@@ -13,7 +13,9 @@ const { useTheme } = VM.require(
 if (!useTheme) {
   return <div>loading...</div>;
 }
-const theme = useTheme(Storage.get("theme"));
+const theme = useTheme(
+  Storage.get("theme", `${config.ownerId}/widget/SourceScan`)
+);
 
 const [limit, setLimit] = useState(limits[0]);
 const [selectedPage, setSelectedPage] = useState(1);
