@@ -35,6 +35,8 @@ const light = {
 }
 
 const useTheme = (storedTheme) => {
+  if (!storedTheme) return light
+
   return storedTheme === 'light' ? light : dark
 }
 

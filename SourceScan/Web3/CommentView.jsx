@@ -13,7 +13,7 @@ const { useTheme } = VM.require(
 if (!useTheme) {
   return <div>loading...</div>
 }
-const theme = useTheme(Storage.privateGet('theme') || 'light')
+const theme = useTheme(Storage.privateGet('theme'))
 
 const { CStack, CHStack, Text } = VM.require(
   `${config.ownerId}/widget/SourceScan.UI.Components`
