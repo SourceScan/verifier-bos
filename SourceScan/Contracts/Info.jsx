@@ -337,7 +337,7 @@ return (
                 <Widget
                   src={`${state.ownerId}/widget/SourceScan.Web3.CommentInput`}
                   props={{
-                    contractId: contractId,
+                    contractId: props.contractId,
                   }}
                 />
                 <Widget
