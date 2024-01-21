@@ -1,17 +1,27 @@
 const { getConfig } = VM.require(
   `sourcescan.near/widget/SourceScan.libs.constants`
 )
+if (!getConfig) {
+  return <div>loading...</div>
+}
 const config = getConfig(context.networkId)
 const comment = props.comment
 
 const { useTheme } = VM.require(
   `${config.ownerId}/widget/SourceScan.libs.theme`
 )
+if (!useTheme) {
+  return <div>loading...</div>
+}
 const theme = useTheme(Storage.privateGet('theme'))
 
 const { CStack, CHStack, Text } = VM.require(
   `${config.ownerId}/widget/SourceScan.UI.Components`
 )
+
+if (!CStack || !CHStack || !Text) {
+  return <div>loading...</div>
+}
 
 const CommentContainer = styled.div`
   padding: 18px;
