@@ -31,8 +31,10 @@ return (
         src={`${config.ownerId}/widget/SourceScan.Web3.VoteContract`}
         props={{ type: `Downvote`, contract: contract, contractId: contractId }}
       />
-      <CStack onClick={props.onCommentsClick}>
-        <CommentIcon width={'24px'} height={'24px'} />
+      <CStack>
+        <div onClick={props.onCommentsClick}>
+          <CommentIcon width={'24px'} height={'24px'} />
+        </div>
         <Text>{contract.comments.length}</Text>
       </CStack>
     </CHStack>
