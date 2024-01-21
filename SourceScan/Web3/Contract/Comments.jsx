@@ -13,7 +13,7 @@ const { useTheme } = VM.require(
 if (!useTheme) {
   return <div>loading...</div>
 }
-const theme = useTheme(Storage.privateGet('theme'))
+const theme = useTheme(Storage.privateGet('theme') || 'light')
 
 const [limit, setLimit] = useState(limits[0])
 const [selectedPage, setSelectedPage] = useState(1)
