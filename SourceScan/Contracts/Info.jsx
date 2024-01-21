@@ -103,7 +103,7 @@ const CStack = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 64px;
 
   @media only screen and (max-width: 750px) {
     width: 90%;
@@ -334,13 +334,21 @@ return (
               }}
             />
             {showComments ? (
-              <Widget
-                src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Comments`}
-                props={{
-                  contractId: props.contractId,
-                  contract: state.contract,
-                }}
-              />
+              <>
+                <Widget
+                  src={`${state.ownerId}/widget/SourceScan.Web3.CommentInput`}
+                  props={{
+                    contractId: contractId,
+                  }}
+                />
+                <Widget
+                  src={`${state.ownerId}/widget/SourceScan.Web3.Contract.Comments`}
+                  props={{
+                    contractId: props.contractId,
+                    contract: state.contract,
+                  }}
+                />
+              </>
             ) : null}
           </CStack>
         </Main>

@@ -40,27 +40,6 @@ const Text = styled.div`
   font-size: 16px;
 `
 
-const DashedContainer = styled.div`
-  padding: 18px;
-  color: currentColor;
-  border: 1px dashed currentColor;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-
-  @media only screen and (max-width: 750px) {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    width: 95%;
-  }
-`
-
 return {
   CHStack,
   CStack,

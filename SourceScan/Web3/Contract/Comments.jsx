@@ -9,18 +9,6 @@ const { useTheme } = VM.require(
 )
 const theme = useTheme(Storage.privateGet('theme'))
 
-const { CHStack } = VM.require(
-  `${config.ownerId}/widget/SourceScan.UI.Components`
-)
-
-const [commentContent, setCommentContent] = useState('')
-const addComment = () => {
-  Near.call(config.contractId, 'add_comment', {
-    account_id: contractId,
-    content: commentContent,
-  })
-}
-
 const [limit, setLimit] = useState(limits[0])
 const [selectedPage, setSelectedPage] = useState(1)
 const [fromIndex, setFromIndex] = useState(0)
@@ -66,47 +54,39 @@ const CommentsContainer = styled.div`
 `
 
 return (
-  <>
-    <CHStack>
-      <input
-        onChange={(e) => setCommentContent(e.target.value)}
-        value={commentContent}
-      />
-      <button onClick={addComment}>send</button>
-    </CHStack>
-    <CommentsContainer>
-      <Widget
-        src={`${config.ownerId}/widget/SourceScan.Inputs.Limits`}
-        props={{
-          handleOptionsChange: handleOptionsChange,
-          theme: theme,
-          limits: limits,
-          selectedLimit: limit,
-        }}
-      />
-      {comments ? (
-        comments.map((comment, i) => (
-          <Widget
-            key={i}
-            src={`${config.ownerId}/widget/SourceScan.Web3.CommentView`}
-            props={{ comment: comment }}
-          />
-        ))
-      ) : (
+  <CommentsContainer>
+    <Widget
+      src={`${config.ownerId}/widget/SourceScan.Inputs.Limits`}
+      props={{
+        label: 'Comments per page',
+        handleOptionsChange: handleOptionsChange,
+        theme: theme,
+        limits: limits,
+        selectedLimit: limit,
+      }}
+    />
+    {comments ? (
+      comments.map((comment, i) => (
         <Widget
-          src={`${config.ownerId}/widget/SourceScan.Common.Spinner`}
-          props={{ width: '20px', height: '20px' }}
+          key={i}
+          src={`${config.ownerId}/widget/SourceScan.Web3.CommentView`}
+          props={{ comment: comment }}
         />
-      )}
+      ))
+    ) : (
       <Widget
-        src={`${config.ownerId}/widget/SourceScan.Inputs.Pagination`}
-        props={{
-          theme: theme,
-          pages: pages,
-          selectedPage: selectedPage,
-          handlePageChange: handlePageChange,
-        }}
+        src={`${config.ownerId}/widget/SourceScan.Common.Spinner`}
+        props={{ width: '20px', height: '20px' }}
       />
-    </CommentsContainer>
-  </>
+    )}
+    <Widget
+      src={`${config.ownerId}/widget/SourceScan.Inputs.Pagination`}
+      props={{
+        theme: theme,
+        pages: pages,
+        selectedPage: selectedPage,
+        handlePageChange: handlePageChange,
+      }}
+    />
+  </CommentsContainer>
 )
