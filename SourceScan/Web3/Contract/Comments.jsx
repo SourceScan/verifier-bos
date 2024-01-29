@@ -62,38 +62,44 @@ const CommentsContainer = styled.div`
 
 return (
   <CommentsContainer>
-    <Widget
-      src={`${config.ownerId}/widget/SourceScan.Inputs.Limits`}
-      props={{
-        label: "Comments per page",
-        handleOptionsChange: handleOptionsChange,
-        theme: theme,
-        limits: limits,
-        selectedLimit: limit,
-      }}
-    />
     {comments ? (
-      comments.map((comment, i) => (
-        <Widget
-          key={i}
-          src={`${config.ownerId}/widget/SourceScan.Web3.CommentView`}
-          props={{ comment: comment }}
-        />
-      ))
+      <>
+        {comments.length > 0 ? (
+          <>
+            <Widget
+              src={`${config.ownerId}/widget/SourceScan.Inputs.Limits`}
+              props={{
+                label: "Comments per page",
+                handleOptionsChange: handleOptionsChange,
+                theme: theme,
+                limits: limits,
+                selectedLimit: limit,
+              }}
+            />
+            {comments.map((comment, i) => (
+              <Widget
+                key={i}
+                src={`${config.ownerId}/widget/SourceScan.Web3.CommentView`}
+                props={{ comment: comment }}
+              />
+            ))}
+            <Widget
+              src={`${config.ownerId}/widget/SourceScan.Inputs.Pagination`}
+              props={{
+                theme: theme,
+                pages: pages,
+                selectedPage: selectedPage,
+                handlePageChange: handlePageChange,
+              }}
+            />
+          </>
+        ) : null}
+      </>
     ) : (
       <Widget
         src={`${config.ownerId}/widget/SourceScan.Common.Spinner`}
         props={{ width: "20px", height: "20px" }}
       />
     )}
-    <Widget
-      src={`${config.ownerId}/widget/SourceScan.Inputs.Pagination`}
-      props={{
-        theme: theme,
-        pages: pages,
-        selectedPage: selectedPage,
-        handlePageChange: handlePageChange,
-      }}
-    />
   </CommentsContainer>
 );
