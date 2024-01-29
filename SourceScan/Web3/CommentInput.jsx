@@ -25,21 +25,12 @@ if (!CStack || !Text) {
   return <div>loading...</div>;
 }
 
-const Input = styled.input`
+const Input = styled.textarea`
   height: 125px;
   width: 100%;
   border-radius: 6px;
   text-align: start;
   padding: 5px 10px; /* shorthand for padding-top, padding-right, padding-bottom, padding-left */
-  border: 1px solid ${theme.border};
-  color: ${theme.color};
-  background-color: ${theme.bg};
-  transition: border 0.1s ease-in-out;
-  resize: none; /* Disable resizing if you want */
-
-  :hover {
-    border: 1px solid ${theme.hover.border};
-  }
 `;
 
 const Button = styled.button`
@@ -74,7 +65,7 @@ const handleChange = (e) => {
 return (
   <CStack>
     <Text>Leave a comment</Text>
-    <Input onChange={handleChange} value={value} autoFocus />
+    <Input onChange={handleChange} value={value} />
     <Button onClick={addComment}>post</Button>
   </CStack>
 );
