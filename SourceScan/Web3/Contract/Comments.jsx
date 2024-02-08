@@ -1,6 +1,14 @@
+const useNetwork = (mainnet, testnet) => {
+  return context.networkId === "mainnet" ? mainnet : testnet;
+};
+
 const { getConfig, limits } = VM.require(
-  `sourcescan.near/widget/SourceScan.libs.constants`
+  `${useNetwork(
+    "sourcescan.near",
+    "sourcescan.testnet"
+  )}/widget/SourceScan.libs.constants`
 );
+
 if (!getConfig) {
   return <div>loading...</div>;
 }
